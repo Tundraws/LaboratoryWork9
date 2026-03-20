@@ -22,7 +22,6 @@ class TestTcpServerIntegration(unittest.TestCase):
     def send_request(self, message):
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as client_socket:
             client_socket.connect((self.HOST, self.PORT))
-            # Исправленная f-строка
             formatted_message = f"{message}\n"
             client_socket.sendall(formatted_message.encode())
             return client_socket.recv(self.BUFFER_SIZE).decode().strip()
