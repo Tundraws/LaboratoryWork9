@@ -23,5 +23,5 @@ jobs:
       - name: Build and Test 
         working-directory: ./task_b3
         run: |
-          maturin develop
+          pip install .
           pytest
