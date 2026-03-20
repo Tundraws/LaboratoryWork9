@@ -38,7 +38,7 @@ jobs:
         with:
           command: develop
       - name: Run tests
-        run: pytest tests/
+        run: pytest task_b3/
       - name: Build wheels
         uses: PyO3/maturin-action@v1
         with:
