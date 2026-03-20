@@ -1,0 +1,33 @@
+name: CD Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build_and_test:
+    name: Build on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install maturin pytest
+          
+      - name: Build Rust Module and Run Tests
+        run: |
+          cd task_b3
+          maturin develop
+          pytest -v tests/test_main.py
